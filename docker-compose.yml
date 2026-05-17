@@ -59,8 +59,9 @@ services:
     build:
       context: ./front_despacho
       args:
-        VITE_API_VENTAS: http://18.207.219.40:8080
-        VITE_API_DESPACHOS: http://18.207.219.40:8081
+        VITE_API_VENTAS: http://34.238.23.161:8080      
+        VITE_API_DESPACHOS: http://34.238.23.161:8081  
+    image: lucianobc/front-despacho:latest              
     container_name: front-despacho
     ports:
       - "80:80"
