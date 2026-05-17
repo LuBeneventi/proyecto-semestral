@@ -51,11 +51,5 @@ jobs:
           aws ssm send-command \
             --instance-ids ${{ secrets.EC2_FRONTEND_INSTANCE_ID }} \
             --document-name "AWS-RunShellScript" \
-            --parameters commands=[
-              "aws ecr get-login-password --region ${{ secrets.AWS_REGION }} | docker login --username AWS --password-stdin ${{ secrets.ECR_REGISTRY }}",
-              "docker pull ${{ secrets.ECR_REPO_URL_BACKEND }}:latest",
-              "docker pull ${{ secrets.ECR_REPO_URL_BACKEND_DESPACHOS }}:latest",
-              "docker pull ${{ secrets.ECR_REPO_URL_FRONTEND }}:latest",
-              "cd ~/proyecto && docker-compose down && docker-compose up -d"
-            ] \
+            --parameters '{"commands":["aws ecr get-login-password --region ${{ secrets.AWS_REGION }} | docker login --username AWS --password-stdin ${{ secrets.ECR_REGISTRY }}","docker pull ${{ secrets.ECR_REPO_URL_BACKEND }}:latest","docker pull ${{ secrets.ECR_REPO_URL_BACKEND_DESPACHOS }}:latest","docker pull ${{ secrets.ECR_REPO_URL_FRONTEND }}:latest","cd /home/ec2-user/proyecto && docker-compose down && docker-compose up -d"]}' \
             --region ${{ secrets.AWS_REGION }}
